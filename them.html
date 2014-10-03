@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+<head>
+
+{MobileAppHeaders}
+<meta charset="utf-8">
+<title>{Title}{block:SearchPage} ({lang:Search results for SearchQuery}){/block:SearchPage}{block:PermalinkPage}{block:PostSummary} — {PostSummary}{/block:PostSummary}{/block:PermalinkPage}</title>
+{block:Description}
+<meta name="description" content="{MetaDescription}">
+{/block:Description}
+<meta name="viewport" content="width=900">
+
+<!-- Custom Field -->
+
+<meta name="image:Background" content=""/>
+<meta name="image:FavIcon" content=""/>
+
+
+<meta name="if:Show post notes" content="1"/>
+<meta name="if:Show Post Tag" content="1"/>
+<meta name="if:Show Post Date" content="1"/>
+<meta name="if:Show Like and Repost" content="1"/>
+
+
+<meta name="text:facebook" content=""/>
+<meta name="text:twitter" content=""/>
+<meta name="text:instagrem" content=""/>
+<meta name="text:website" content=""/>
+
+<meta name="color:Post" content="#ffffff"/>
+<meta name="color:Text" content="#2C2C2C"/>
+<meta name="color:Link" content="#00D2EB"/>
+<meta name="color:DataTag" content="#D1D1D1"/>
+
+
+<meta name="text:Font Normal" content="21"/>
+<meta name="text:Font Oblique" content="26"/>
+<meta name="text:Font Strike" content="21"/>
+<meta name="text:Font Bold" content="55"/>
+<meta name="text:DataTag" content="21"/>
+
+
+<link rel="shortcut icon" href="{image:Favicon}" />
+
+
+
+<!-- END Custom Field -->
+
+
+
+<!-- HTML5 Shiv -->
+<!--[if lt IE 9]>
+<script src="http://static.tumblr.com/hriofhd/Qj0m8pn7q/html5shiv.js"></script>
+<![endif]-->
+
+
+
+<!-- jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!-- END jQuery ->
+
+<!-- Супер сетка изображений -->
+<script src="http://static.tumblr.com/wgijwsy/jgemkyt9x/jquery.photoset-grid.min.js"></script>
+<!-- END Супер сетка изображений -->
+
+
+
+<!-- css / Do not change / This css is important -->
+<script src="http://static.tumblr.com/gppsu2j/eDznbdo61/lightbox.js"></script>
+<link rel="stylesheet" href="http://lokeshdhakar.com/projects/lightbox2/css/lightbox.css">
+
+
+
+<script>
+    $(document).ready(function(){
+
+        $(document).scroll(function(){
+            if ($(document).scrollTop() > $(window).height()){
+                $('.ToTop').show();
+            } else {
+                $('.ToTop').hide();
+            }
+        });
+
+        $(".ToTop").click(function() {
+            $('html, body').animate({
+                scrollTop: $("h1").offset().top
+            }, 600);
+        });
+
+        $('.button-toggle').click(function(){$('nav ul').toggle('300')})
+        scripts();
+        {block:NextPage}
+        $('#footer a').click(function(){
+            $('li#footer').remove();
+            $.ajax({
+                type: "POST",
+                url: '{NextPage}',
+                success: function(data) {
+                    //console.log($(data).find('ol'));
+                    $('ol').append($(data).find('ol > li'));
+                    scripts();
+
+
+
+                }
+
+            });
+            return false;
+        });
+        {/block:NextPage}
+
+    })
+
+
+
+
+    function scripts(){
+
+
+        $('.photoset-id').each(function(){
+            $(this).photosetGrid({
+                highresLinks: true,
+                rel: 'lightbox['+$(this).attr('data-id')+']',
+                gutter: '0px',
+
+                onComplete: function(){
+
+                }
+            });
+
+        })
+
+        $('.photoset-grid-new').removeClass('photoset-grid-new').addClass('photoset-grid');
+    }
+
+</script>
+<link rel="stylesheet" href="http://static.tumblr.com/gppsu2j/v3bnb2hul/reset.css">
+<link rel="stylesheet" href="http://static.tumblr.com/gppsu2j/R7Ynb9ntd/fonts.css" />
+
+<style crossorigin="anonymous">
+
+
+
+
+
+
+.clear{
+    clear: both;
+    display: block;
+}
+a{
+    text-decoration: none;
+    color:inherit;
+}
+img{
+    max-width: none;
+}
+body{
+    background: url('{image:Background}') fixed no-repeat;
+    font-family: 'Avant', sans-serif;
+    background-size: cover;
+}
+img{
+}
+a > img:hover{
+    opacity: 0.9;
+}
+.tag a:hover, .date a:hover{
+color: {color:Text};
+}
+.wrap{
+    width: 900px;
+    margin: 0 auto;
+}
+h1 {
+    margin-top: 89px;
+    margin-bottom: 79px;
+    font-size: 89px;
+    font-weight: normal;
+    letter-spacing: 21px;
+}
+.description{
+    font-size: 34px;
+    margin-bottom: 89px;
+}
+.header {
+    text-align: center;
+}
+.icon{
+    font-family: 'IcoMoon';
+    margin-bottom: 55px;
+}
+.icon:hover:before{
+    opacity: 1;
+}
+.icon:before{
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    font-family: 'IcoMoon';
+    font-size: 55px;
+    opacity: 0.5;
+    margin: 0 21px;
+}
+.facebook:before{
+    content: '\e769';
+}
+.instagram:before{
+    content: '\e76c';
+}
+.twitter:before{
+    content: '\e76d';
+}
+.website:before{
+    content: '\e77b';
+}
+.social{
+    margin-bottom: 89px;
+}
+.content{
+background: {color:Post};
+padding-bottom: 55px;
+}
+.post ol li {
+    list-style-type: decimal;
+    margin-left: 55px;
+}
+.post ul li {
+    list-style-type: disc;
+    margin-left: 55px;
+}
+.post, .post_notes{
+    position: relative;
+    margin-bottom: 55px;
+    padding: 0 55px;
+}
+.post .cont a{
+color: {color:Link};
+}
+.post .cont a:hover{
+    text-decoration: underline;
+}
+.post_notes li{
+    margin-bottom: 5px;
+}
+.post_notes .action a{
+    text-decoration: underline;
+}
+.post_notes .action:hover a{
+    text-decoration: none;
+}
+.post_notes img{
+    margin-right: 13px;
+    vertical-align: middle;
+}
+.post:after,  li#footer:after{
+    content: '';
+    display: block;
+    height: 5px;
+    background: url('http://static.tumblr.com/gppsu2j/myQnb2rx3/border.svg') repeat;
+}
+ul, ol, li{
+    list-style: none;
+}
+h2{
+    font-size: 55px;
+    font-weight: normal;
+    margin-bottom: 34px;
+}
+.cont{
+    font-size: 21px;
+    position: relative;
+}
+.post a > img{
+    width: 100%;
+}
+.cont em{
+    margin: 34px 0;
+    display: block;
+font-size:{text:Font Oblique}px;
+color:{color:Text};
+}
+.cont p{
+    margin-bottom: 21px;
+font-size:{text:Font Normal}px;
+color: {color:Text};
+}
+.cont strong{
+    display: block;
+    margin: 21px 0;
+    font-weight: bold;
+font-size:{text:Font Bold}px;
+color: {color:Text};
+}
+.cont strike{
+    margin-bottom: 21px;
+color: {color:Text};
+}
+.date {
+    float: right;
+    width: 40%;
+    text-align: right;
+}
+.tag {
+    float: left;
+    width: 60%;
+    text-align: left;
+}
+.date, .tag, .source a{
+font-size: {text:DataTag}px;
+color: {color:DataTag};
+}
+.tag a{
+    margin-right: 13px;
+}
+.DateTag{
+    margin-bottom: 34px;
+    margin-top: 34px;
+}
+.likeShare{
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    background: #fff;
+    padding: 0 10px;
+    width: 144px;
+    margin-left: -72px;
+    text-align: center;
+}
+.likeShare > *{
+    display: inline-block!important;
+    width: 21px;
+    height: 21px;
+    margin: 0 13px;
+}
+.likeShare > *:hover  svg{
+    fill: gold!important;
+}
+.photo > a{
+    margin: 0 -55px;
+    display: block;
+    margin-bottom: 55px;
+}
+li p img{
+    margin: 0 -55px;
+    width: 900px;
+}
+.quote .cont{
+    background: #f5f5f5;
+    border: 1px solid #d5d5d5;
+    padding: 13px 21px 0;
+    border-radius: 13px;
+}
+.quote .cont:before {
+    content: "❝";
+    float: left;
+    margin-right: 10px;
+    font-size: 55px;
+    position: absolute;
+    top: -34px;
+    left: -21px;
+    color: #636363;
+}
+.quote .cont:after {
+    content: "❞";
+    float: left;
+    margin-right: 10px;
+    font-size: 55px;
+    position: absolute;
+    bottom: -34px;
+    right: -21px;
+    color: #636363;
+}
+.post.video > iframe, .post.audio > iframe, .post.video > a{
+    width: 900px!important;
+    margin: 0 -55px 34px -55px;
+    height: 540px;
+}
+.post.audio > iframe{
+    height: 900px;
+}
+li#footer {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 34px;
+    letter-spacing: 3px;
+    padding: 0 55px;
+}
+li#footer a {
+    margin-bottom: 34px;
+    display: block;
+}
+.photoset {
+}
+.photoset a{
+    padding: 0!important;
+    margin: 0!important;
+}
+p.copyright {
+    text-align: center;
+    margin-top: 55px;
+    font-size: 21px;
+color: {color:Text};
+}
+.button-toggle {
+    background: rgba(0, 0, 0, 0.5);
+    width: 89px;
+    padding: 21px;
+    cursor: pointer;
+}
+.button-toggle > div {
+    height: 8px;
+    margin: 0 auto;
+    background: #fff;
+}
+.button-toggle > div + div {
+    margin-top: 10px;
+}
+nav{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+nav ul{
+    display: none;
+}
+nav ul li {
+    background: rgba(0, 0, 0, 0.5);
+    margin-top: 1px;
+    color: #fff;
+    font-size: 34px;
+    text-align: center;
+    white-space: nowrap;
+}
+nav ul li a{
+    padding: 13px 21px;
+    display: block;
+}
+nav ul li:hover, .button-toggle:hover{
+    background: rgba(0, 0, 0, 0.4);
+}
+.wid900{
+    width: 900px!important;
+    margin: 0 -55px 55px;
+}
+.lb-nav{
+}
+.lb-nav > a{
+    width: 50%!important;
+    display: block!important;
+}
+.lb-nav > a:hover{
+    display: block!important;
+    opacity: 1!important;
+
+}
+.lb-data .lb-details {
+    width: 100%;
+    text-align: center;
+}
+.lb-outerContainer{
+    background: none;
+}
+.lb-data .lb-close {
+    position: absolute;
+    z-index: 999999;
+    right: 0;
+    top: -30px;
+}
+.answer{
+    margin-top: 13px;
+}
+.question {
+    border: 1px solid #dddddd;
+    background: #eeeeee;
+    border-radius: 13px;
+    padding: 13px 21px;
+}
+.ToTop{
+    display: none;
+    width: 89px;
+    height: 89px;
+    background: rgba(0, 0, 0, 0.5) url('http://static.tumblr.com/gppsu2j/foHnbdpi9/totop.svg') no-repeat;
+    opacity: 0.5;
+    position: fixed;
+    right: 13px;
+    bottom: 13px;
+    cursor: pointer;
+}
+.ToTop:hover{
+    opacity: 1;
+}
+</style >
+</head>
+
+<body>
+{block:HasPages}
+<nav class="menu">
+    <div class="button-toggle">
+        <div></div><div></div><div></div>
+    </div>
+    <ul>
+        {block:Pages}
+        <li>
+            <a href="{URL}">{Label}</a>
+        </li>
+        {/block:Pages}
+    </ul>
+</nav>
+{/block:HasPages}
+
+
+
+<div class="wrap">
+
+<!-- header -->
+<div class="header">
+    <h1><a href="{BlogURL}">{Title}</a></h1>
+
+    {block:Description}
+    <p class="description">{Description}</p>
+    {/block:Description}
+
+    <div class="social">
+        {block:iffacebook}
+        <a href="{text:facebook}" trget="_blank">
+            <span class="icon facebook"></span>
+        </a>
+        {/block:iffacebook}
+        {block:iftwitter}
+        <a href="{text:twitter}" trget="_blank">
+            <span class="icon twitter"></span>
+        </a>
+        {/block:iftwitter}
+        {block:ifinstagrem}
+        <a href="{text:instagrem}" trget="_blank">
+            <span class="icon instagram"></span>
+        </a>
+        {/block:ifinstagrem}
+        {block:ifwebsite}
+        <a href="{text:website}" trget="_blank">
+            <span class="icon website"></span>
+        </a>
+        {/block:ifwebsite}
+    </div>
+
+</div>
+<!-- END Header -->
+
+
+
+
+
+<div class="content">
+<ol class="posts">
+    {block:Posts}
+
+
+
+
+
+    {block:Text}<!-- TEXT -->
+    <li class="post text">
+        {block:Title}
+        <h2><a href="{Permalink}">{Title}</a></h2>
+        {/block:Title}
+        <div class="cont">
+            {Body}
+        </div>
+
+        {/block:Text}
+
+        {block:Photo}<!-- PHOTO -->
+    <li class="post photo">
+        <a href='{PhotoURL-HighRes}' rel='lightbox'>
+            <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"/>
+        </a>
+        {block:Caption}
+        <div class="cont">{Caption}</div>
+        {/block:Caption}
+
+
+        {/block:Photo}
+
+
+
+
+        {block:Quote}<!-- QUOTE -->
+    <li class="post quote">
+        <div class="cont">
+            <p>
+                {Quote}
+            </p>
+        </div>
+        {block:Source}
+        <div class="source"><em>{Source}</em></div>
+        {/block:Source}
+
+        {/block:Quote}
+
+
+
+
+
+        {block:Link}<!-- LINK -->
+    <li class="post link">
+        <a href="{URL}" class="link" {Target}>{Name}</a>
+
+        {block:Description}
+        <div class="cont">{Description}</div>
+        {/block:Description}
+
+        {/block:Link}
+
+
+
+
+        {block:Video}<!-- VIDEO -->
+    <li class="post video">
+
+        {block:Title}
+        <h2><a href="{Permalink}">{Title}</a></h2>
+        {/block:Title}
+
+        {VideoEmbed-700}
+        {block:Caption}
+        <div class="cont">{Caption}</div>
+        {/block:Caption}
+
+
+        {/block:Video}
+
+        {block:Audio}<!-- AUDIO -->
+    <li class="post audio">
+        {AudioEmbed}
+        {block:Caption}
+        <div class="cont">{Caption}</div>
+        {/block:Caption}
+
+
+
+        {/block:Audio}
+
+
+
+        {block:Panorama}<!-- PANORAMA -->
+    <li class="post panorama">
+        {LinkOpenTag}
+        <img src="{PhotoURL-Panorama}" rel='lightbox' alt="{PhotoAlt}"/>
+        {LinkCloseTag}{block:Caption}
+        <div class="cont">{Caption}</div>
+        {/block:Caption}
+
+        {/block:Panorama}
+
+
+
+
+        {block:Photoset}<!-- PHOTOSET -->
+    <li class="post photoset " >
+
+
+        <div class="wid900 photoset-id photoset-grid-new" data-layout="{PhotosetLayout}"  data-id="photoset{PostID}">
+            {block:Photos}
+            <div>
+                <img src="{PhotoURL-HighRes}"
+                     width="{PhotoWidth-400}"height="{PhotoHeight-400}"  data-highres="{PhotoURL-HighRes}" data-id='{PostID}' />
+            </div>
+            {/block:Photos}
+
+        </div>
+        {block:Caption}
+        <div class="cont">{Caption}</div>
+        {/block:Caption}
+
+
+        {/block:Photoset}
+
+
+
+
+
+
+
+
+        {block:Chat}<!-- CHAT -->
+    <li class="post chat">
+        {block:Title}
+        <h3><a href="{Permalink}">{Title}</a></h3>
+        {/block:Title}
+
+        <ul class="chat">
+            {block:Lines}
+            <li class="{Alt} user_{UserNumber}">
+                {block:Label}
+                <span class="label">{Label}</span>
+                {/block:Label}{Line}
+            </li>
+            {/block:Lines}
+        </ul>
+
+        {/block:Chat}
+
+        <!-- DATE and TAG -->
+        <div class="DateTag">
+
+            <div class="tag">
+                {block:IfShowPostTag}
+                {block:Tags}
+                <a href="{TagURL}">#{Tag}</a>
+                {/block:Tags}
+                {/block:IfShowPostTag}
+
+            </div>
+
+            <div class="date">
+
+                {block:IfShowPostDate}
+                <a href="{Permalink}">{TimeAgo} </a>
+                {/block:IfShowPostDate}
+
+                {block:IfShowPostNotes}
+                {block:NoteCount}
+                / <a class="notecount" href="{Permalink}#notes">{NoteCount} {lang:Notes}</a>
+                {/block:NoteCount}
+                {/block:IfShowPostNotes}
+
+            </div>
+
+            <div class="clear"></div>
+        </div>
+        <div class="likeShare">
+            {block:IfShowLikeandRepost}
+            {LikeButton}
+            {ReblogButton}
+            {/block:IfShowLikeandRepost}
+
+        </div>
+
+
+    </li>
+    {/block:Posts}
+
+
+
+
+</ol>
+
+{block:PostNotes}<!-- NOTE Post -->
+<section class="post_notes">
+    <a name="notes">
+        {PostNotes}
+    </a>
+</section>
+{/block:PostNotes}
+
+{block:NextPage}
+<li id="footer">
+    <a href="{NextPage}">{lang:Older entries}</a>
+</li>
+{/block:NextPage}
+
+
+<p class="copyright"> &copy {CopyrightYears} | {lang:Powered by Tumblr}</p>
+</div>
+
+
+
+
+</div>
+
+<div class="ToTop"></div>
+
+</body>
+</html>
